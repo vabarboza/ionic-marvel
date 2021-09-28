@@ -1,0 +1,17 @@
+detail {
+  .comic-img{
+      width: 100%;
+      border-radius: 4px;
+  }
+
+  .comic-name{
+      color: map-get($colors, dark-smoke);
+      font-size: 1.5rem;
+      font-family: map-get($fonts, semiNegrito);
+  }
+
+  .comic-description{
+    color: map-get($colors, dark-smoke);
+    font-size: 1.5rem;
+  }
+}

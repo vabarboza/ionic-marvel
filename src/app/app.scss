@@ -1,0 +1,180 @@
+/* css global
+Coloque aqui estilos que podem ser utilizados em todas as páginas
+*/
+
+*{
+    /* utilização de variáveis no CSS */
+    font-family: map-get($fonts, regular);
+}
+
+.header-marvel{
+    /* utilização de variáveis no CSS */
+    background: map-get($colors, fullbranco);
+    color: map-get($colors, dark-smoke);
+    font-size: 1.4rem;
+}
+
+.ion-icon-back{
+    color: map-get($colors, dark-smoke);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.img-obj{
+    height: 30px;
+}
+
+.info-test{
+    font-size: 1.2rem;
+}
+
+.name-test{
+    font-family: map-get($fonts, semiNegrito);
+}
+
+.icon-account{
+    background: map-get($colors, snow);
+    margin-left: 10px;
+    color: map-get($colors, dark-smoke);
+    font-family: map-get($fonts, semiNegrito);
+    font-size: 1.5rem;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.icon-account:hover{
+    color: map-get($colors, snow);
+    background: map-get($colors, dark-smoke);
+    cursor: pointer;
+}
+
+.content-marvel{
+    background: map-get($colors, dark-snow);
+    position: relative;
+    overflow: hidden;
+}
+
+.content-page{
+    padding: 6vh 7vw;
+}
+
+.page-title{
+    text-align: center;
+    color: map-get($colors, dark-smoke);
+    font-size: 2.4rem;
+    font-family: map-get($fonts, semiNegrito);
+}
+
+.page-subtitle{
+    margin-top: 25px;
+    text-align: center;
+    color: map-get($colors, dark-smoke);
+    font-size: 1.8rem;
+    font-family: map-get($fonts, semiNegrito);
+}
+
+
+.no-padding-bottom{
+    padding-bottom: 0;
+}
+
+.label-up-input{
+    color: map-get($colors, dark-smoke);
+    font-family: map-get($fonts, semiNegrito);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.input-form{
+    border-radius: 4px;
+    border: 1px solid map-get($colors, dark-snow);
+    background: map-get($colors, fullbranco);
+    padding: 0;
+}
+
+.input-form input{
+    margin: 5px 5px;
+    font-size: 1.4rem;
+}
+
+.none-results {
+    text-align: center;
+    color: map-get($colors, dark-smoke);
+    font-size: 1.5rem;
+}
+
+/*pagination*/
+.go-page{
+    color: map-get($colors, dark-smoke);
+    font-size: 1.5rem;
+    background: map-get($colors, snow);
+    border: 1px solid map-get($colors, dark-snow);
+    border-radius: 4px;
+    width: 50px!important;
+    margin: 0 4px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.go-page-active{
+    color: map-get($colors, fullbranco);
+    font-size: 1.5rem;
+    background: map-get($colors, dark-blue);
+    border: 1px solid map-get($colors, dark-blue);
+    border-radius: 4px;
+    width: 50px!important;
+    margin: 0 4px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.icon-nav-page{
+    margin: 0 5px;
+    cursor: pointer;
+}
+/* --- */
+
+.footer-marvel{
+    padding: 15px 0;
+    background: map-get($colors, fullbranco);
+    color: map-get($colors, dark-smoke);
+    font-size: 1.4rem;
+}
+
+/* Personalização das medias 
+    configure quantos e quais resoluções forem necessáriass
+*/
+@media(max-width: 576px){
+}
+
+@media(min-width: 768px){
+    .page-title{
+        text-align: left;
+        font-size: 2.6rem;
+    }
+    
+    .label-up-input{
+        text-align: left;
+        font-size: 1.4rem;
+    }
+
+    .page-subtitle{
+        text-align: left;
+        font-size: 2rem;
+    }
+    
+}
+
+@media(min-width: 992px){
+}
+
+@media(min-width: 1100px){
+}
+
+@media(min-width: 1600px){
+}
+

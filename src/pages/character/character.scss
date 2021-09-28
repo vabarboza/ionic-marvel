@@ -1,0 +1,66 @@
+character {
+    .title-list{
+        color: map-get($colors, smoke);
+        font-size: 1rem;
+    }
+
+    .white-frame-list{
+        background: map-get($colors, fullbranco);
+        border-radius: 4px;
+        box-shadow: 0px 0px 1px #00000033;
+        padding: 5px;
+    }
+
+    .white-frame-list:hover{
+        cursor: pointer;
+        box-shadow: 0px 0px 5px #00000033;
+    }
+
+    .character-img{
+        height: 48px;
+        width: 48px;
+        border-radius: 4px;
+    }
+
+    .character-name{
+        color: map-get($colors, dark-smoke);
+        font-size: 1.5rem;
+        margin-left: 2rem;
+        font-family: map-get($fonts, semiNegrito);
+    }
+
+    .character-info{
+        color: map-get($colors, dark-smoke);
+        font-size: 1.2rem;
+    }
+
+    .icon-search-character{
+        position: absolute;
+        top: 30%;
+        right: 3%;
+        font-size: 1.5rem;
+        color: map-get($colors, dark-smoke);
+    }
+
+    .display-block{
+        display: inline-flex;
+    }
+
+    .class-md-none{
+        display: none;
+    }
+
+    .fixed-info{
+        position: sticky;
+        top: 0;
+        left: 0;
+        background: map-get($colors, dark-snow);
+        z-index: 1000;
+    }
+
+    @media(min-width: 768px){
+        .class-md-none{
+            display: initial;
+        }
+    }
+}
