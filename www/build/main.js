@@ -4,109 +4,9 @@ webpackJsonp([0],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Character; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_provider__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_pagination__ = __webpack_require__(419);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__detail_detail__ = __webpack_require__(200);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var Character = /** @class */ (function () {
-    function Character(provider, navCtrl) {
-        this.provider = provider;
-        this.navCtrl = navCtrl;
-        this.characters = [];
-        this.filtro = {
-            descricao: '',
-            bkp: ''
-        };
-        this.pagination = new __WEBPACK_IMPORTED_MODULE_4__util_pagination__["a" /* Pagination */]();
-        this.checking = true;
-        this.filtroCtrl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormControl */]();
-        this.pagination.setLimit(10);
-        this.initFilter();
-    }
-    /* *INICIALIZA FILTRO */
-    Character.prototype.initFilter = function () {
-        var _this = this;
-        this.filtroCtrl.valueChanges.debounceTime(750).subscribe(function (filtro) {
-            _this.getAllCharacters();
-        });
-    };
-    /* *RECUPERA PERSONAGENS */
-    Character.prototype.getAllCharacters = function () {
-        var _this = this;
-        this.checking = true;
-        if (this.filtro.descricao != this.filtro.bkp) {
-            this.pagination.reset();
-        }
-        this.provider.getAllCharacters(this.pagination, this.filtro.descricao).then(function (characters) {
-            _this.filtro.bkp = _this.filtro.descricao;
-            _this.characters = [];
-            _this.characters = characters;
-            _this.checking = false;
-        });
-    };
-    /* PAGINATION */
-    Character.prototype.goFirstPage = function () {
-        this.pagination.setCurrentPage(1);
-        this.getAllCharacters();
-    };
-    Character.prototype.goLastPage = function () {
-        this.pagination.setCurrentPage(this.pagination.getPages()[this.pagination.getPages().length - 1]);
-        this.getAllCharacters();
-    };
-    Character.prototype.goPreviousPage = function () {
-        this.pagination.setCurrentPage(this.pagination.getCurrentPage() - 1);
-        this.getAllCharacters();
-    };
-    Character.prototype.goNextPage = function () {
-        this.pagination.setCurrentPage(this.pagination.getCurrentPage() + 1);
-        this.getAllCharacters();
-    };
-    Character.prototype.goPage = function (page) {
-        this.pagination.setCurrentPage(page);
-        this.getAllCharacters();
-    };
-    /* --- */
-    Character.prototype.goDetails = function (character) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__detail_detail__["a" /* Detail */], { character: character });
-    };
-    Character = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'character',template:/*ion-inline-start:"C:\projetos\aulas\ionic-marvel\src\pages\character\character.html"*/'<!-- cabeçalho, <ion-header></ion-header> -->\n\n<ion-header class="header-marvel">\n\n  <ion-row align-items-center>\n\n    <ion-col col-8 offset-4 text-right>\n\n      <ion-row align-items-center>\n\n        <ion-col col-8 col-md-11 class="info-test" text-right>\n\n          <span class="name-test">Aula IONIC </span> Projeto Marvel\n\n        </ion-col>\n\n        <ion-col col-4 col-md-1 text-right>\n\n          <span class="icon-account"> CB </span>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-header>\n\n\n\n<!-- corpo, <ion-content></ion-content> -->\n\n<ion-content class="content-marvel">\n\n  <ion-row>\n\n    <ion-col col-12 class="content-page">\n\n      <ion-row class="fixed-info">\n\n        <ion-col col-12 no-padding>\n\n          <ion-row>\n\n            <ion-col class="page-title">\n\n              Busca de personagens\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-12 class="no-padding-bottom label-up-input">\n\n              Nome do personagem\n\n            </ion-col>\n\n            <ion-col col-12 col-md-4 class="no-padding-top">\n\n              <ion-input class="input-form" [formControl]="filtroCtrl" [(ngModel)]="filtro.descricao" [value]="filtro.descricao" placeholder="Search"></ion-input>\n\n              <ion-icon class="icon-search-character" name="search"></ion-icon>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n    \n\n      <ion-row [hidden]="checking">\n\n        <ion-col col-12 *ngIf="characters.length > 0">\n\n          <ion-row align-items-center>\n\n            <ion-col col-12 class="no-padding-bottom">\n\n              <ion-row>\n\n                <ion-col col-12 col-md-4 class="title-list">\n\n                  Personagem \n\n                </ion-col>\n\n                <ion-col col-12 col-md-4 class="title-list class-md-none">\n\n                  Séries \n\n                </ion-col>\n\n                <ion-col col-12 col-md-4 class="title-list class-md-none">\n\n                  Eventos\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row *ngFor="let character of characters" align-items-center>\n\n            <ion-col col-12>\n\n              <ion-row class="white-frame-list" align-items-center (click)="goDetails(character)">\n\n                <ion-col col-12 col-md-4 class="col-character">\n\n                  <ion-row align-items-center>\n\n                    <img *ngIf="character.thumbnail && character.thumbnail.path" [src]="character.thumbnail.path + \'.\' + character.thumbnail.extension" [alt]="character.name" class="character-img">\n\n                    <span class="character-name">{{ character.name }}</span>\n\n                  </ion-row>\n\n                </ion-col>\n\n                <ion-col col-md-4 class="class-md-none">\n\n                  <ion-row *ngFor="let serie of character.series.items">\n\n                    <ion-col no-padding class="character-info">\n\n                      {{serie.name}}\n\n                    </ion-col>\n\n                  </ion-row>\n\n                </ion-col>\n\n                <ion-col col-md-4 class="class-md-none">\n\n                  <ion-row *ngFor="let event of character.events.items">\n\n                    <ion-col no-padding class="character-info">\n\n                      {{event.name}}\n\n                    </ion-col>\n\n                  </ion-row>\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n\n\n        <ion-col col-12 *ngIf="characters.length == 0" class="none-results">\n\n          Nenhum personagem encontrado!\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <ion-row [hidden]="!checking">\n\n        <ion-col col-12>\n\n          <loading></loading>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>\n\n\n\n<!-- rodapé, <ion-footer></ion-footer> -->\n\n<ion-footer class="footer-marvel">\n\n  <ion-row align-items-center>\n\n    <ion-col col-12 text-center>\n\n      <span class="icon-nav-page" text-center (click)="goFirstPage()">\n\n        <ion-icon name="skip-backward"></ion-icon>\n\n      </span>\n\n      <span class="icon-nav-page" text-center (click)="goPreviousPage()">\n\n        <ion-icon name="md-arrow-dropleft"></ion-icon>\n\n      </span>\n\n      <span *ngFor="let page of pagination.pages" [hidden]="page < pagination.getThresholdDown() || page > pagination.getThresholdUp()" [ngClass]="page == pagination.getCurrentPage() ? \'col go-page-active\' : \'col go-page\'" text-center (click)="goPage(page)">\n\n        {{page}}\n\n      </span>\n\n      <span class="icon-nav-page" text-center (click)="goNextPage()">\n\n        <ion-icon name="md-arrow-dropright"></ion-icon>\n\n      </span>\n\n      <span class="icon-nav-page" text-center (click)="goLastPage()">\n\n        <ion-icon name="skip-forward"></ion-icon>\n\n      </span>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-footer>'/*ion-inline-end:"C:\projetos\aulas\ionic-marvel\src\pages\character\character.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_provider__["a" /* Provider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */]])
-    ], Character);
-    return Character;
-}());
-
-//# sourceMappingURL=character.js.map
-
-/***/ }),
-
-/***/ 102:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Provider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_service__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__service_service__ = __webpack_require__(335);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -189,7 +89,7 @@ var Provider = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 112:
+/***/ 111:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -202,11 +102,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 112;
+webpackEmptyAsyncContext.id = 111;
 
 /***/ }),
 
-/***/ 155:
+/***/ 154:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -219,22 +119,154 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 155;
+webpackEmptyAsyncContext.id = 154;
 
 /***/ }),
 
-/***/ 198:
+/***/ 197:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Grid; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var Grid = /** @class */ (function () {
+    function Grid() {
+    }
+    Grid = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'grid',template:/*ion-inline-start:"C:\projetos\ionic-marvel\src\pages\grid\grid.html"*/'<ion-header class="header-marvel">\n\n</ion-header>\n\n\n\n<ion-content class="content-marvel">\n\n</ion-content>\n\n\n\n<ion-footer class="footer-marvel">\n\n</ion-footer>'/*ion-inline-end:"C:\projetos\ionic-marvel\src\pages\grid\grid.html"*/,
+        }),
+        __metadata("design:paramtypes", [])
+    ], Grid);
+    return Grid;
+}());
+
+//# sourceMappingURL=grid.js.map
+
+/***/ }),
+
+/***/ 334:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Character; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_provider__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_pagination__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__detail_detail__ = __webpack_require__(336);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var Character = /** @class */ (function () {
+    function Character(provider, navCtrl) {
+        this.provider = provider;
+        this.navCtrl = navCtrl;
+        this.characters = [];
+        this.filtro = {
+            descricao: '',
+            bkp: ''
+        };
+        this.pagination = new __WEBPACK_IMPORTED_MODULE_4__util_pagination__["a" /* Pagination */]();
+        this.checking = true;
+        this.filtroCtrl = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["a" /* FormControl */]();
+        this.pagination.setLimit(10);
+        this.initFilter();
+    }
+    /* *INICIALIZA FILTRO */
+    Character.prototype.initFilter = function () {
+        var _this = this;
+        this.filtroCtrl.valueChanges.debounceTime(750).subscribe(function (filtro) {
+            _this.getAllCharacters();
+        });
+    };
+    /* *RECUPERA PERSONAGENS */
+    Character.prototype.getAllCharacters = function () {
+        var _this = this;
+        this.checking = true;
+        if (this.filtro.descricao != this.filtro.bkp) {
+            this.pagination.reset();
+        }
+        this.provider.getAllCharacters(this.pagination, this.filtro.descricao).then(function (characters) {
+            _this.filtro.bkp = _this.filtro.descricao;
+            _this.characters = [];
+            _this.characters = characters;
+            _this.checking = false;
+        });
+    };
+    /* PAGINATION */
+    Character.prototype.goFirstPage = function () {
+        this.pagination.setCurrentPage(1);
+        this.getAllCharacters();
+    };
+    Character.prototype.goLastPage = function () {
+        this.pagination.setCurrentPage(this.pagination.getPages()[this.pagination.getPages().length - 1]);
+        this.getAllCharacters();
+    };
+    Character.prototype.goPreviousPage = function () {
+        this.pagination.setCurrentPage(this.pagination.getCurrentPage() - 1);
+        this.getAllCharacters();
+    };
+    Character.prototype.goNextPage = function () {
+        this.pagination.setCurrentPage(this.pagination.getCurrentPage() + 1);
+        this.getAllCharacters();
+    };
+    Character.prototype.goPage = function (page) {
+        this.pagination.setCurrentPage(page);
+        this.getAllCharacters();
+    };
+    /* --- */
+    Character.prototype.goDetails = function (character) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__detail_detail__["a" /* Detail */], { character: character });
+    };
+    Character = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'character',template:/*ion-inline-start:"C:\projetos\ionic-marvel\src\pages\character\character.html"*/'<!-- cabeçalho, <ion-header></ion-header> -->\n\n<ion-header class="header-marvel">\n\n  <ion-row align-items-center>\n\n    <ion-col col-8 offset-4 text-right>\n\n      <ion-row align-items-center>\n\n        <ion-col col-8 col-md-11 class="info-test" text-right>\n\n          <span class="name-test">Aula IONIC </span> Projeto Marvel\n\n        </ion-col>\n\n        <ion-col col-4 col-md-1 text-right>\n\n          <span class="icon-account"> CB </span>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-header>\n\n\n\n<!-- corpo, <ion-content></ion-content> -->\n\n<ion-content class="content-marvel">\n\n  <ion-row>\n\n    <ion-col col-12 class="content-page">\n\n      <ion-row class="fixed-info">\n\n        <ion-col col-12 no-padding>\n\n          <ion-row>\n\n            <ion-col class="page-title">\n\n              Busca de personagens\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row>\n\n            <ion-col col-12 class="no-padding-bottom label-up-input">\n\n              Nome do personagem\n\n            </ion-col>\n\n            <ion-col col-12 col-md-4 class="no-padding-top">\n\n              <ion-input class="input-form" [formControl]="filtroCtrl" [(ngModel)]="filtro.descricao" [value]="filtro.descricao" placeholder="Search"></ion-input>\n\n              <ion-icon class="icon-search-character" name="search"></ion-icon>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n    \n\n      <ion-row [hidden]="checking">\n\n        <ion-col col-12 *ngIf="characters.length > 0">\n\n          <ion-row align-items-center>\n\n            <ion-col col-12 class="no-padding-bottom">\n\n              <ion-row>\n\n                <ion-col col-12 col-md-4 class="title-list">\n\n                  Personagem \n\n                </ion-col>\n\n                <ion-col col-12 col-md-4 class="title-list class-md-none">\n\n                  Séries \n\n                </ion-col>\n\n                <ion-col col-12 col-md-4 class="title-list class-md-none">\n\n                  Eventos\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-col>\n\n          </ion-row>\n\n          <ion-row *ngFor="let character of characters" align-items-center>\n\n            <ion-col col-12>\n\n              <ion-row class="white-frame-list" align-items-center (click)="goDetails(character)">\n\n                <ion-col col-12 col-md-4 class="col-character">\n\n                  <ion-row align-items-center>\n\n                    <img *ngIf="character.thumbnail && character.thumbnail.path" [src]="character.thumbnail.path + \'.\' + character.thumbnail.extension" [alt]="character.name" class="character-img">\n\n                    <span class="character-name">{{ character.name }}</span>\n\n                  </ion-row>\n\n                </ion-col>\n\n                <ion-col col-md-4 class="class-md-none">\n\n                  <ion-row *ngFor="let serie of character.series.items">\n\n                    <ion-col no-padding class="character-info">\n\n                      {{serie.name}}\n\n                    </ion-col>\n\n                  </ion-row>\n\n                </ion-col>\n\n                <ion-col col-md-4 class="class-md-none">\n\n                  <ion-row *ngFor="let event of character.events.items">\n\n                    <ion-col no-padding class="character-info">\n\n                      {{event.name}}\n\n                    </ion-col>\n\n                  </ion-row>\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n\n\n        <ion-col col-12 *ngIf="characters.length == 0" class="none-results">\n\n          Nenhum personagem encontrado!\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <ion-row [hidden]="!checking">\n\n        <ion-col col-12>\n\n          <loading></loading>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>\n\n\n\n<!-- rodapé, <ion-footer></ion-footer> -->\n\n<ion-footer class="footer-marvel">\n\n  <ion-row align-items-center>\n\n    <ion-col col-12 text-center>\n\n      <span class="icon-nav-page" text-center (click)="goFirstPage()">\n\n        <ion-icon name="skip-backward"></ion-icon>\n\n      </span>\n\n      <span class="icon-nav-page" text-center (click)="goPreviousPage()">\n\n        <ion-icon name="md-arrow-dropleft"></ion-icon>\n\n      </span>\n\n      <span *ngFor="let page of pagination.pages" [hidden]="page < pagination.getThresholdDown() || page > pagination.getThresholdUp()" [ngClass]="page == pagination.getCurrentPage() ? \'col go-page-active\' : \'col go-page\'" text-center (click)="goPage(page)">\n\n        {{page}}\n\n      </span>\n\n      <span class="icon-nav-page" text-center (click)="goNextPage()">\n\n        <ion-icon name="md-arrow-dropright"></ion-icon>\n\n      </span>\n\n      <span class="icon-nav-page" text-center (click)="goLastPage()">\n\n        <ion-icon name="skip-forward"></ion-icon>\n\n      </span>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-footer>'/*ion-inline-end:"C:\projetos\ionic-marvel\src\pages\character\character.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__providers_provider__["a" /* Provider */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* NavController */]])
+    ], Character);
+    return Character;
+}());
+
+//# sourceMappingURL=character.js.map
+
+/***/ }),
+
+/***/ 335:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Service; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(416);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(426);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__ = __webpack_require__(427);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_toPromise__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_md5__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__util_md5__ = __webpack_require__(428);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -288,15 +320,15 @@ var Service = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 200:
+/***/ 336:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Detail; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_provider__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__character__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_provider__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__character__ = __webpack_require__(334);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -391,7 +423,7 @@ var Detail = /** @class */ (function () {
     };
     Detail = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'detail',template:/*ion-inline-start:"C:\projetos\aulas\ionic-marvel\src\pages\character\detail\detail.html"*/'<ion-header class="header-marvel">\n\n  <ion-row align-items-center>\n\n    <ion-col col-8 offset-4 text-right>\n\n      <ion-row align-items-center>\n\n        <ion-col col-8 col-md-11 no-padding class="info-test" text-right>\n\n          <span class="name-test">Leonardo G. Catharin </span> Teste de front-end\n\n        </ion-col>\n\n        <ion-col col-4 col-md-1 no-padding text-right>\n\n          <span class="icon-account"> CB </span>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-header>\n\n\n\n<ion-content class="content-marvel">\n\n  <ion-row>\n\n    <ion-col col-12 class="content-page">\n\n      <ion-row>\n\n        <ion-col col-12>\n\n          <ion-icon class="ion-icon-back" name="arrow-back" (click)="voltar()"></ion-icon>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row align-items-center>\n\n        <ion-col col-12 col-md-2>\n\n          <img *ngIf="character.thumbnail && character.thumbnail.path" [src]="character.thumbnail.path + \'.\' + character.thumbnail.extension" [alt]="character.name" class="character-img">\n\n        </ion-col>\n\n        <ion-col col-12 col-md-9>\n\n          <ion-row class="page-title">{{character.name}}</ion-row>\n\n          <ion-row>\n\n            <span class="character-info" *ngFor="let serie of character.series.items;let ix = index">\n\n              <span>\n\n                {{serie.name}}\n\n                <span *ngIf="ix != character.series.items.length - 1">,&nbsp;</span>\n\n              </span>\n\n            </span>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n      <ion-row>\n\n        <ion-col col-12 class="page-subtitle">\n\n          Lista de histórias em quadrinhos\n\n          <hr>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <ion-row [hidden]="checking">\n\n        <ion-col col-12>\n\n          <ion-row *ngFor="let comic of comics">\n\n            <ion-col col-12>\n\n              <ion-row align-items-center>\n\n                <ion-col col-12 col-md-1>\n\n                  <img *ngIf="comic.thumbnail && comic.thumbnail.path" [src]="comic.thumbnail.path + \'.\' + comic.thumbnail.extension" [alt]="comic.title" class="comic-img">\n\n                </ion-col>\n\n                <ion-col col-12 col-md-11>\n\n                  <span class="comic-name">{{ comic.title }}</span> <br>\n\n                  <span class="comic-description">\n\n                    {{comic.description}}\n\n                  </span>\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <ion-row [hidden]="!checking">\n\n        <ion-col col-12>\n\n          <loading></loading>\n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\projetos\aulas\ionic-marvel\src\pages\character\detail\detail.html"*/,
+            selector: 'detail',template:/*ion-inline-start:"C:\projetos\ionic-marvel\src\pages\character\detail\detail.html"*/'<ion-header class="header-marvel">\n\n  <ion-row align-items-center>\n\n    <ion-col col-8 offset-4 text-right>\n\n      <ion-row align-items-center>\n\n        <ion-col col-8 col-md-11 no-padding class="info-test" text-right>\n\n          <span class="name-test">Leonardo G. Catharin </span> Teste de front-end\n\n        </ion-col>\n\n        <ion-col col-4 col-md-1 no-padding text-right>\n\n          <span class="icon-account"> CB </span>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-col>\n\n  </ion-row>\n\n</ion-header>\n\n\n\n<ion-content class="content-marvel">\n\n  <ion-row>\n\n    <ion-col col-12 class="content-page">\n\n      <ion-row>\n\n        <ion-col col-12>\n\n          <ion-icon class="ion-icon-back" name="arrow-back" (click)="voltar()"></ion-icon>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row align-items-center>\n\n        <ion-col col-12 col-md-2>\n\n          <img *ngIf="character.thumbnail && character.thumbnail.path" [src]="character.thumbnail.path + \'.\' + character.thumbnail.extension" [alt]="character.name" class="character-img">\n\n        </ion-col>\n\n        <ion-col col-12 col-md-9>\n\n          <ion-row class="page-title">{{character.name}}</ion-row>\n\n          <ion-row>\n\n            <span class="character-info" *ngFor="let serie of character.series.items;let ix = index">\n\n              <span>\n\n                {{serie.name}}\n\n                <span *ngIf="ix != character.series.items.length - 1">,&nbsp;</span>\n\n              </span>\n\n            </span>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n      <ion-row>\n\n        <ion-col col-12 class="page-subtitle">\n\n          Lista de histórias em quadrinhos\n\n          <hr>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <ion-row [hidden]="checking">\n\n        <ion-col col-12>\n\n          <ion-row *ngFor="let comic of comics">\n\n            <ion-col col-12>\n\n              <ion-row align-items-center>\n\n                <ion-col col-12 col-md-1>\n\n                  <img *ngIf="comic.thumbnail && comic.thumbnail.path" [src]="comic.thumbnail.path + \'.\' + comic.thumbnail.extension" [alt]="comic.title" class="comic-img">\n\n                </ion-col>\n\n                <ion-col col-12 col-md-11>\n\n                  <span class="comic-name">{{ comic.title }}</span> <br>\n\n                  <span class="comic-description">\n\n                    {{comic.description}}\n\n                  </span>\n\n                </ion-col>\n\n              </ion-row>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n\n\n      <ion-row [hidden]="!checking">\n\n        <ion-col col-12>\n\n          <loading></loading>\n\n        </ion-col>\n\n      </ion-row>\n\n      \n\n    </ion-col>\n\n  </ion-row>\n\n</ion-content>'/*ion-inline-end:"C:\projetos\ionic-marvel\src\pages\character\detail\detail.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_provider__["a" /* Provider */]])
     ], Detail);
@@ -402,16 +434,16 @@ var Detail = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 336:
+/***/ 337:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(337);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(338);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime__ = __webpack_require__(359);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime__ = __webpack_require__(360);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_debounceTime__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_module__ = __webpack_require__(366);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_module__ = __webpack_require__(367);
 
 
 
@@ -422,30 +454,31 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 366:
+/***/ 367:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(367);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_device__ = __webpack_require__(420);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_component__ = __webpack_require__(368);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ionic_native_device__ = __webpack_require__(417);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ionic_angular__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_http__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_date_picker__ = __webpack_require__(421);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_charts__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ionic_native_splash_screen__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_http__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_date_picker__ = __webpack_require__(418);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_charts__ = __webpack_require__(419);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_social_sharing__ = __webpack_require__(427);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_sqlite__ = __webpack_require__(428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_character_character__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_character_detail_detail__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__providers_service_service__ = __webpack_require__(198);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_provider__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_loading_loading__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_social_sharing__ = __webpack_require__(424);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_sqlite__ = __webpack_require__(425);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_grid_grid__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_character_character__ = __webpack_require__(334);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_character_detail_detail__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__providers_service_service__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__providers_provider__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_loading_loading__ = __webpack_require__(430);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -468,6 +501,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 /* PAGES */
 
 
+
 /* SERVIÇO */
 
 /* PROVIDERS */
@@ -481,9 +515,10 @@ var AppModule = /** @class */ (function () {
         Object(__WEBPACK_IMPORTED_MODULE_4__angular_core__["NgModule"])({
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_character_character__["a" /* Character */],
-                __WEBPACK_IMPORTED_MODULE_14__pages_character_detail_detail__["a" /* Detail */],
-                __WEBPACK_IMPORTED_MODULE_17__components_loading_loading__["a" /* Loading */]
+                __WEBPACK_IMPORTED_MODULE_13__pages_grid_grid__["a" /* Grid */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_character_character__["a" /* Character */],
+                __WEBPACK_IMPORTED_MODULE_15__pages_character_detail_detail__["a" /* Detail */],
+                __WEBPACK_IMPORTED_MODULE_18__components_loading_loading__["a" /* Loading */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* ReactiveFormsModule */],
@@ -495,17 +530,18 @@ var AppModule = /** @class */ (function () {
                     statusbarPadding: true,
                 }, {
                     links: [
-                        { component: __WEBPACK_IMPORTED_MODULE_13__pages_character_character__["a" /* Character */], name: 'character', segment: 'character' },
-                        { component: __WEBPACK_IMPORTED_MODULE_14__pages_character_detail_detail__["a" /* Detail */], name: 'detail', segment: 'character/detail/:id', defaultHistory: [__WEBPACK_IMPORTED_MODULE_13__pages_character_character__["a" /* Character */]] },
+                        { component: __WEBPACK_IMPORTED_MODULE_14__pages_character_character__["a" /* Character */], name: 'character', segment: 'character' },
+                        { component: __WEBPACK_IMPORTED_MODULE_15__pages_character_detail_detail__["a" /* Detail */], name: 'detail', segment: 'character/detail/:id', defaultHistory: [__WEBPACK_IMPORTED_MODULE_14__pages_character_character__["a" /* Character */]] },
                     ]
                 })
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_5_ionic_angular__["a" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_0__app_component__["a" /* MyApp */],
-                __WEBPACK_IMPORTED_MODULE_13__pages_character_character__["a" /* Character */],
-                __WEBPACK_IMPORTED_MODULE_14__pages_character_detail_detail__["a" /* Detail */],
-                __WEBPACK_IMPORTED_MODULE_17__components_loading_loading__["a" /* Loading */]
+                __WEBPACK_IMPORTED_MODULE_13__pages_grid_grid__["a" /* Grid */],
+                __WEBPACK_IMPORTED_MODULE_14__pages_character_character__["a" /* Character */],
+                __WEBPACK_IMPORTED_MODULE_15__pages_character_detail_detail__["a" /* Detail */],
+                __WEBPACK_IMPORTED_MODULE_18__components_loading_loading__["a" /* Loading */]
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_7__ionic_native_status_bar__["a" /* StatusBar */],
@@ -516,8 +552,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_12__ionic_native_sqlite__["a" /* SQLite */],
                 Screen,
                 { provide: __WEBPACK_IMPORTED_MODULE_4__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_5_ionic_angular__["b" /* IonicErrorHandler */] },
-                __WEBPACK_IMPORTED_MODULE_16__providers_provider__["a" /* Provider */],
-                __WEBPACK_IMPORTED_MODULE_15__providers_service_service__["a" /* Service */]
+                __WEBPACK_IMPORTED_MODULE_17__providers_provider__["a" /* Provider */],
+                __WEBPACK_IMPORTED_MODULE_16__providers_service_service__["a" /* Service */]
             ]
         })
     ], AppModule);
@@ -528,16 +564,16 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 367:
+/***/ 368:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(197);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_character_character__ = __webpack_require__(101);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(194);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_grid_grid__ = __webpack_require__(197);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -555,7 +591,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var MyApp = /** @class */ (function () {
     function MyApp(platform, statusBar, splashScreen) {
         this.platform = platform;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_character_character__["a" /* Character */];
+        // rootPage:any = Character;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_grid_grid__["a" /* Grid */];
         this.platform.ready().then(function () {
             if (platform.is("ios")) {
                 statusBar.styleDefault();
@@ -570,7 +607,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\projetos\aulas\ionic-marvel\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\projetos\aulas\ionic-marvel\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\projetos\ionic-marvel\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\projetos\ionic-marvel\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
@@ -581,7 +618,300 @@ var MyApp = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 418:
+/***/ 423:
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./af": 199,
+	"./af.js": 199,
+	"./ar": 200,
+	"./ar-dz": 201,
+	"./ar-dz.js": 201,
+	"./ar-kw": 202,
+	"./ar-kw.js": 202,
+	"./ar-ly": 203,
+	"./ar-ly.js": 203,
+	"./ar-ma": 204,
+	"./ar-ma.js": 204,
+	"./ar-sa": 205,
+	"./ar-sa.js": 205,
+	"./ar-tn": 206,
+	"./ar-tn.js": 206,
+	"./ar.js": 200,
+	"./az": 207,
+	"./az.js": 207,
+	"./be": 208,
+	"./be.js": 208,
+	"./bg": 209,
+	"./bg.js": 209,
+	"./bm": 210,
+	"./bm.js": 210,
+	"./bn": 211,
+	"./bn-bd": 212,
+	"./bn-bd.js": 212,
+	"./bn.js": 211,
+	"./bo": 213,
+	"./bo.js": 213,
+	"./br": 214,
+	"./br.js": 214,
+	"./bs": 215,
+	"./bs.js": 215,
+	"./ca": 216,
+	"./ca.js": 216,
+	"./cs": 217,
+	"./cs.js": 217,
+	"./cv": 218,
+	"./cv.js": 218,
+	"./cy": 219,
+	"./cy.js": 219,
+	"./da": 220,
+	"./da.js": 220,
+	"./de": 221,
+	"./de-at": 222,
+	"./de-at.js": 222,
+	"./de-ch": 223,
+	"./de-ch.js": 223,
+	"./de.js": 221,
+	"./dv": 224,
+	"./dv.js": 224,
+	"./el": 225,
+	"./el.js": 225,
+	"./en-au": 226,
+	"./en-au.js": 226,
+	"./en-ca": 227,
+	"./en-ca.js": 227,
+	"./en-gb": 228,
+	"./en-gb.js": 228,
+	"./en-ie": 229,
+	"./en-ie.js": 229,
+	"./en-il": 230,
+	"./en-il.js": 230,
+	"./en-in": 231,
+	"./en-in.js": 231,
+	"./en-nz": 232,
+	"./en-nz.js": 232,
+	"./en-sg": 233,
+	"./en-sg.js": 233,
+	"./eo": 234,
+	"./eo.js": 234,
+	"./es": 235,
+	"./es-do": 236,
+	"./es-do.js": 236,
+	"./es-mx": 237,
+	"./es-mx.js": 237,
+	"./es-us": 238,
+	"./es-us.js": 238,
+	"./es.js": 235,
+	"./et": 239,
+	"./et.js": 239,
+	"./eu": 240,
+	"./eu.js": 240,
+	"./fa": 241,
+	"./fa.js": 241,
+	"./fi": 242,
+	"./fi.js": 242,
+	"./fil": 243,
+	"./fil.js": 243,
+	"./fo": 244,
+	"./fo.js": 244,
+	"./fr": 245,
+	"./fr-ca": 246,
+	"./fr-ca.js": 246,
+	"./fr-ch": 247,
+	"./fr-ch.js": 247,
+	"./fr.js": 245,
+	"./fy": 248,
+	"./fy.js": 248,
+	"./ga": 249,
+	"./ga.js": 249,
+	"./gd": 250,
+	"./gd.js": 250,
+	"./gl": 251,
+	"./gl.js": 251,
+	"./gom-deva": 252,
+	"./gom-deva.js": 252,
+	"./gom-latn": 253,
+	"./gom-latn.js": 253,
+	"./gu": 254,
+	"./gu.js": 254,
+	"./he": 255,
+	"./he.js": 255,
+	"./hi": 256,
+	"./hi.js": 256,
+	"./hr": 257,
+	"./hr.js": 257,
+	"./hu": 258,
+	"./hu.js": 258,
+	"./hy-am": 259,
+	"./hy-am.js": 259,
+	"./id": 260,
+	"./id.js": 260,
+	"./is": 261,
+	"./is.js": 261,
+	"./it": 262,
+	"./it-ch": 263,
+	"./it-ch.js": 263,
+	"./it.js": 262,
+	"./ja": 264,
+	"./ja.js": 264,
+	"./jv": 265,
+	"./jv.js": 265,
+	"./ka": 266,
+	"./ka.js": 266,
+	"./kk": 267,
+	"./kk.js": 267,
+	"./km": 268,
+	"./km.js": 268,
+	"./kn": 269,
+	"./kn.js": 269,
+	"./ko": 270,
+	"./ko.js": 270,
+	"./ku": 271,
+	"./ku.js": 271,
+	"./ky": 272,
+	"./ky.js": 272,
+	"./lb": 273,
+	"./lb.js": 273,
+	"./lo": 274,
+	"./lo.js": 274,
+	"./lt": 275,
+	"./lt.js": 275,
+	"./lv": 276,
+	"./lv.js": 276,
+	"./me": 277,
+	"./me.js": 277,
+	"./mi": 278,
+	"./mi.js": 278,
+	"./mk": 279,
+	"./mk.js": 279,
+	"./ml": 280,
+	"./ml.js": 280,
+	"./mn": 281,
+	"./mn.js": 281,
+	"./mr": 282,
+	"./mr.js": 282,
+	"./ms": 283,
+	"./ms-my": 284,
+	"./ms-my.js": 284,
+	"./ms.js": 283,
+	"./mt": 285,
+	"./mt.js": 285,
+	"./my": 286,
+	"./my.js": 286,
+	"./nb": 287,
+	"./nb.js": 287,
+	"./ne": 288,
+	"./ne.js": 288,
+	"./nl": 289,
+	"./nl-be": 290,
+	"./nl-be.js": 290,
+	"./nl.js": 289,
+	"./nn": 291,
+	"./nn.js": 291,
+	"./oc-lnc": 292,
+	"./oc-lnc.js": 292,
+	"./pa-in": 293,
+	"./pa-in.js": 293,
+	"./pl": 294,
+	"./pl.js": 294,
+	"./pt": 295,
+	"./pt-br": 296,
+	"./pt-br.js": 296,
+	"./pt.js": 295,
+	"./ro": 297,
+	"./ro.js": 297,
+	"./ru": 298,
+	"./ru.js": 298,
+	"./sd": 299,
+	"./sd.js": 299,
+	"./se": 300,
+	"./se.js": 300,
+	"./si": 301,
+	"./si.js": 301,
+	"./sk": 302,
+	"./sk.js": 302,
+	"./sl": 303,
+	"./sl.js": 303,
+	"./sq": 304,
+	"./sq.js": 304,
+	"./sr": 305,
+	"./sr-cyrl": 306,
+	"./sr-cyrl.js": 306,
+	"./sr.js": 305,
+	"./ss": 307,
+	"./ss.js": 307,
+	"./sv": 308,
+	"./sv.js": 308,
+	"./sw": 309,
+	"./sw.js": 309,
+	"./ta": 310,
+	"./ta.js": 310,
+	"./te": 311,
+	"./te.js": 311,
+	"./tet": 312,
+	"./tet.js": 312,
+	"./tg": 313,
+	"./tg.js": 313,
+	"./th": 314,
+	"./th.js": 314,
+	"./tk": 315,
+	"./tk.js": 315,
+	"./tl-ph": 316,
+	"./tl-ph.js": 316,
+	"./tlh": 317,
+	"./tlh.js": 317,
+	"./tr": 318,
+	"./tr.js": 318,
+	"./tzl": 319,
+	"./tzl.js": 319,
+	"./tzm": 320,
+	"./tzm-latn": 321,
+	"./tzm-latn.js": 321,
+	"./tzm.js": 320,
+	"./ug-cn": 322,
+	"./ug-cn.js": 322,
+	"./uk": 323,
+	"./uk.js": 323,
+	"./ur": 324,
+	"./ur.js": 324,
+	"./uz": 325,
+	"./uz-latn": 326,
+	"./uz-latn.js": 326,
+	"./uz.js": 325,
+	"./vi": 327,
+	"./vi.js": 327,
+	"./x-pseudo": 328,
+	"./x-pseudo.js": 328,
+	"./yo": 329,
+	"./yo.js": 329,
+	"./zh-cn": 330,
+	"./zh-cn.js": 330,
+	"./zh-hk": 331,
+	"./zh-hk.js": 331,
+	"./zh-mo": 332,
+	"./zh-mo.js": 332,
+	"./zh-tw": 333,
+	"./zh-tw.js": 333
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 423;
+
+/***/ }),
+
+/***/ 428:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -791,7 +1121,7 @@ var md5 = function (string) {
 
 /***/ }),
 
-/***/ 419:
+/***/ 429:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -885,300 +1215,7 @@ var Pagination = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 426:
-/***/ (function(module, exports, __webpack_require__) {
-
-var map = {
-	"./af": 201,
-	"./af.js": 201,
-	"./ar": 202,
-	"./ar-dz": 203,
-	"./ar-dz.js": 203,
-	"./ar-kw": 204,
-	"./ar-kw.js": 204,
-	"./ar-ly": 205,
-	"./ar-ly.js": 205,
-	"./ar-ma": 206,
-	"./ar-ma.js": 206,
-	"./ar-sa": 207,
-	"./ar-sa.js": 207,
-	"./ar-tn": 208,
-	"./ar-tn.js": 208,
-	"./ar.js": 202,
-	"./az": 209,
-	"./az.js": 209,
-	"./be": 210,
-	"./be.js": 210,
-	"./bg": 211,
-	"./bg.js": 211,
-	"./bm": 212,
-	"./bm.js": 212,
-	"./bn": 213,
-	"./bn-bd": 214,
-	"./bn-bd.js": 214,
-	"./bn.js": 213,
-	"./bo": 215,
-	"./bo.js": 215,
-	"./br": 216,
-	"./br.js": 216,
-	"./bs": 217,
-	"./bs.js": 217,
-	"./ca": 218,
-	"./ca.js": 218,
-	"./cs": 219,
-	"./cs.js": 219,
-	"./cv": 220,
-	"./cv.js": 220,
-	"./cy": 221,
-	"./cy.js": 221,
-	"./da": 222,
-	"./da.js": 222,
-	"./de": 223,
-	"./de-at": 224,
-	"./de-at.js": 224,
-	"./de-ch": 225,
-	"./de-ch.js": 225,
-	"./de.js": 223,
-	"./dv": 226,
-	"./dv.js": 226,
-	"./el": 227,
-	"./el.js": 227,
-	"./en-au": 228,
-	"./en-au.js": 228,
-	"./en-ca": 229,
-	"./en-ca.js": 229,
-	"./en-gb": 230,
-	"./en-gb.js": 230,
-	"./en-ie": 231,
-	"./en-ie.js": 231,
-	"./en-il": 232,
-	"./en-il.js": 232,
-	"./en-in": 233,
-	"./en-in.js": 233,
-	"./en-nz": 234,
-	"./en-nz.js": 234,
-	"./en-sg": 235,
-	"./en-sg.js": 235,
-	"./eo": 236,
-	"./eo.js": 236,
-	"./es": 237,
-	"./es-do": 238,
-	"./es-do.js": 238,
-	"./es-mx": 239,
-	"./es-mx.js": 239,
-	"./es-us": 240,
-	"./es-us.js": 240,
-	"./es.js": 237,
-	"./et": 241,
-	"./et.js": 241,
-	"./eu": 242,
-	"./eu.js": 242,
-	"./fa": 243,
-	"./fa.js": 243,
-	"./fi": 244,
-	"./fi.js": 244,
-	"./fil": 245,
-	"./fil.js": 245,
-	"./fo": 246,
-	"./fo.js": 246,
-	"./fr": 247,
-	"./fr-ca": 248,
-	"./fr-ca.js": 248,
-	"./fr-ch": 249,
-	"./fr-ch.js": 249,
-	"./fr.js": 247,
-	"./fy": 250,
-	"./fy.js": 250,
-	"./ga": 251,
-	"./ga.js": 251,
-	"./gd": 252,
-	"./gd.js": 252,
-	"./gl": 253,
-	"./gl.js": 253,
-	"./gom-deva": 254,
-	"./gom-deva.js": 254,
-	"./gom-latn": 255,
-	"./gom-latn.js": 255,
-	"./gu": 256,
-	"./gu.js": 256,
-	"./he": 257,
-	"./he.js": 257,
-	"./hi": 258,
-	"./hi.js": 258,
-	"./hr": 259,
-	"./hr.js": 259,
-	"./hu": 260,
-	"./hu.js": 260,
-	"./hy-am": 261,
-	"./hy-am.js": 261,
-	"./id": 262,
-	"./id.js": 262,
-	"./is": 263,
-	"./is.js": 263,
-	"./it": 264,
-	"./it-ch": 265,
-	"./it-ch.js": 265,
-	"./it.js": 264,
-	"./ja": 266,
-	"./ja.js": 266,
-	"./jv": 267,
-	"./jv.js": 267,
-	"./ka": 268,
-	"./ka.js": 268,
-	"./kk": 269,
-	"./kk.js": 269,
-	"./km": 270,
-	"./km.js": 270,
-	"./kn": 271,
-	"./kn.js": 271,
-	"./ko": 272,
-	"./ko.js": 272,
-	"./ku": 273,
-	"./ku.js": 273,
-	"./ky": 274,
-	"./ky.js": 274,
-	"./lb": 275,
-	"./lb.js": 275,
-	"./lo": 276,
-	"./lo.js": 276,
-	"./lt": 277,
-	"./lt.js": 277,
-	"./lv": 278,
-	"./lv.js": 278,
-	"./me": 279,
-	"./me.js": 279,
-	"./mi": 280,
-	"./mi.js": 280,
-	"./mk": 281,
-	"./mk.js": 281,
-	"./ml": 282,
-	"./ml.js": 282,
-	"./mn": 283,
-	"./mn.js": 283,
-	"./mr": 284,
-	"./mr.js": 284,
-	"./ms": 285,
-	"./ms-my": 286,
-	"./ms-my.js": 286,
-	"./ms.js": 285,
-	"./mt": 287,
-	"./mt.js": 287,
-	"./my": 288,
-	"./my.js": 288,
-	"./nb": 289,
-	"./nb.js": 289,
-	"./ne": 290,
-	"./ne.js": 290,
-	"./nl": 291,
-	"./nl-be": 292,
-	"./nl-be.js": 292,
-	"./nl.js": 291,
-	"./nn": 293,
-	"./nn.js": 293,
-	"./oc-lnc": 294,
-	"./oc-lnc.js": 294,
-	"./pa-in": 295,
-	"./pa-in.js": 295,
-	"./pl": 296,
-	"./pl.js": 296,
-	"./pt": 297,
-	"./pt-br": 298,
-	"./pt-br.js": 298,
-	"./pt.js": 297,
-	"./ro": 299,
-	"./ro.js": 299,
-	"./ru": 300,
-	"./ru.js": 300,
-	"./sd": 301,
-	"./sd.js": 301,
-	"./se": 302,
-	"./se.js": 302,
-	"./si": 303,
-	"./si.js": 303,
-	"./sk": 304,
-	"./sk.js": 304,
-	"./sl": 305,
-	"./sl.js": 305,
-	"./sq": 306,
-	"./sq.js": 306,
-	"./sr": 307,
-	"./sr-cyrl": 308,
-	"./sr-cyrl.js": 308,
-	"./sr.js": 307,
-	"./ss": 309,
-	"./ss.js": 309,
-	"./sv": 310,
-	"./sv.js": 310,
-	"./sw": 311,
-	"./sw.js": 311,
-	"./ta": 312,
-	"./ta.js": 312,
-	"./te": 313,
-	"./te.js": 313,
-	"./tet": 314,
-	"./tet.js": 314,
-	"./tg": 315,
-	"./tg.js": 315,
-	"./th": 316,
-	"./th.js": 316,
-	"./tk": 317,
-	"./tk.js": 317,
-	"./tl-ph": 318,
-	"./tl-ph.js": 318,
-	"./tlh": 319,
-	"./tlh.js": 319,
-	"./tr": 320,
-	"./tr.js": 320,
-	"./tzl": 321,
-	"./tzl.js": 321,
-	"./tzm": 322,
-	"./tzm-latn": 323,
-	"./tzm-latn.js": 323,
-	"./tzm.js": 322,
-	"./ug-cn": 324,
-	"./ug-cn.js": 324,
-	"./uk": 325,
-	"./uk.js": 325,
-	"./ur": 326,
-	"./ur.js": 326,
-	"./uz": 327,
-	"./uz-latn": 328,
-	"./uz-latn.js": 328,
-	"./uz.js": 327,
-	"./vi": 329,
-	"./vi.js": 329,
-	"./x-pseudo": 330,
-	"./x-pseudo.js": 330,
-	"./yo": 331,
-	"./yo.js": 331,
-	"./zh-cn": 332,
-	"./zh-cn.js": 332,
-	"./zh-hk": 333,
-	"./zh-hk.js": 333,
-	"./zh-mo": 334,
-	"./zh-mo.js": 334,
-	"./zh-tw": 335,
-	"./zh-tw.js": 335
-};
-function webpackContext(req) {
-	return __webpack_require__(webpackContextResolve(req));
-};
-function webpackContextResolve(req) {
-	var id = map[req];
-	if(!(id + 1)) // check for number or string
-		throw new Error("Cannot find module '" + req + "'.");
-	return id;
-};
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = 426;
-
-/***/ }),
-
-/***/ 429:
+/***/ 430:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1199,7 +1236,7 @@ var Loading = /** @class */ (function () {
     }
     Loading = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: "loading",template:/*ion-inline-start:"C:\projetos\aulas\ionic-marvel\src\components\loading\loading.html"*/'<ion-row>\n\n  <ion-col col-12>\n\n    <div align="center" class="g-carregando"> \n\n      <div class="g-carregando-animacao">\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-vermelha"> </div></div>\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-verde"> </div></div>\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-azul"> </div></div>\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-preta"> </div></div>\n\n      </div>\n\n    </div> \n\n  </ion-col>\n\n</ion-row>'/*ion-inline-end:"C:\projetos\aulas\ionic-marvel\src\components\loading\loading.html"*/
+            selector: "loading",template:/*ion-inline-start:"C:\projetos\ionic-marvel\src\components\loading\loading.html"*/'<ion-row>\n\n  <ion-col col-12>\n\n    <div align="center" class="g-carregando"> \n\n      <div class="g-carregando-animacao">\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-vermelha"> </div></div>\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-verde"> </div></div>\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-azul"> </div></div>\n\n        <div class="g-carregando-interno"><div class="g-carregando-bolas g-carregando-bola-preta"> </div></div>\n\n      </div>\n\n    </div> \n\n  </ion-col>\n\n</ion-row>'/*ion-inline-end:"C:\projetos\ionic-marvel\src\components\loading\loading.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], Loading);
@@ -1210,5 +1247,5 @@ var Loading = /** @class */ (function () {
 
 /***/ })
 
-},[336]);
+},[337]);
 //# sourceMappingURL=main.js.map

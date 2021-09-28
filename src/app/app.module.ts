@@ -13,6 +13,7 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 import { SQLite } from '@ionic-native/sqlite';
 
 /* PAGES */
+import { Grid } from '../pages/grid/grid';
 import { Character } from '../pages/character/character';
 import { Detail } from '../pages/character/detail/detail';
 
@@ -28,6 +29,7 @@ import { Loading } from "../components/loading/loading";
 @NgModule({
   declarations: [
     MyApp,
+    Grid, /* add */
     Character,
     Detail,
     Loading
@@ -51,6 +53,7 @@ import { Loading } from "../components/loading/loading";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    Grid, /* add */
     Character,
     Detail,
     Loading
