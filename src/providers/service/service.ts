@@ -6,8 +6,8 @@ import { md5 } from '../../util/md5';
 
 @Injectable()
 export class Service {
-    private publicKey  = '03fea40fe0eff0e36bf2335761cc8f56';
-    private privateKey = 'bd30a6085573379d650ac4760568f4bff312301f';
+    private publicKey  = '';
+    private privateKey = '';
     
     constructor(private http: Http) {}
     
