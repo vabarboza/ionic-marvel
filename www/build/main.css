@@ -107817,3 +107817,15 @@ detail .comic-description {
   color: #555555;
   font-size: 1.5rem;
 }
+
+grid .coluna1 {
+  border: 4px solid red;
+}
+
+grid .coluna2 {
+  border: 4px solid green;
+}
+
+grid .coluna3 {
+  border: 4px solid yellow;
+}

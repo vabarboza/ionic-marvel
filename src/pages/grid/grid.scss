@@ -1,4 +1,17 @@
 grid {
+
+    .coluna1{
+        border: 4px solid red;
+    }
+
+    .coluna2{
+        border: 4px solid green;
+    }
+
+    .coluna3{
+        border: 4px solid blue;
+    }
+
     @media(min-width: 768px){
     }
 }
