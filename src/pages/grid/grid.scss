@@ -1,15 +1,27 @@
 grid {
-
-    .coluna1{
-        border: 4px solid red;
+    .titulo-pagina{
+        color: map-get($colors, branco);
     }
 
-    .coluna2{
-        border: 4px solid green;
+    .label-segmento{
+        color: map-get($colors, branco);
     }
 
-    .coluna3{
-        border: 4px solid blue;
+    .header-marvel{
+        background-color: map-get($colors, dark-blue);
+    }
+
+    .footer-marvel{
+        padding: 0;
+        background-color: map-get($colors, cinza);
+    }
+
+    .btn-limpar{
+        background-color: map-get($colors, verde);
+    }
+
+    .btn-salvar{
+        background-color: map-get($colors, dark-blue);
     }
 
     @media(min-width: 768px){

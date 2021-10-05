@@ -1,22 +1,79 @@
 <ion-header class="header-marvel">
-</ion-header>
-
-<!-- conteudo -->
-<ion-content class="content-marvel">
     <ion-row>
-        <ion-col no-padding offset-1 col-10 class="coluna1">
-            <ion-row>
-                <ion-col no-padding col-4 offset-1 class="coluna2">
-                    teste 1
-                </ion-col>
-                <ion-col no-padding col-4 offset-1 class="coluna3">
-                    teste 2
-                </ion-col>
-            </ion-row>
+        <ion-col col-12>
+            <h3 class="titulo-pagina">Primeira página</h3>
         </ion-col>
     </ion-row>
+    
+    <ion-segment [(ngModel)]="segment" (ionChange)="change($event)">
+        <ion-segment-button value="0">
+            <ion-label class="label-segmento"> Dados pessoais </ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1">
+            <ion-label class="label-segmento"> Imagens </ion-label>
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+<ion-content class="content-marvel">
+    <ion-refresher class="refresher" (ionRefresh)="refresh($event)" pullMax=60>
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-grid *ngIf="segment == '0'">
+        <ion-row>
+            <ion-col col-12>
+                <ion-label stacked> Nome </ion-label>
+                <ion-input type="text" class="input-form" [(ngModel)]="pessoa.nome"></ion-input>
+            </ion-col>
+
+            <ion-col col-12>
+                <ion-label stacked> Sexo </ion-label>
+                <ion-select [(ngModel)]="pessoa.sexo" class="input-form-select" placeholder="Nenhuma opção selecionada">
+                    <ion-option *ngFor="let opcao of opcoes" [value]="opcao.valor"> {{opcao.descricao}} </ion-option>
+                </ion-select>
+            </ion-col>
+
+            <ion-col col-12>
+                <ion-label stacked> Data Nasc. </ion-label>
+                <ion-input type="date" class="input-form" [(ngModel)]="pessoa.data"></ion-input>
+            </ion-col>
+
+            <ion-col col-6>
+                <ion-label stacked> RG </ion-label>
+                <ion-input type="text" class="input-form" [(ngModel)]="pessoa.rg"></ion-input>
+            </ion-col>
+
+            <ion-col col-6>
+                <ion-label stacked> CPF </ion-label>
+                <ion-input type="text" class="input-form" [(ngModel)]="pessoa.cpf"></ion-input>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="segment == '1'">
+        <ion-row>
+            <ion-col col-12>
+                <ion-slides [hidden]="false">
+                    <ion-slide *ngFor="let imagem of imagens">
+                        <ion-img [src]="imagem.path" [alt]="imagem.titulo"></ion-img>
+                    </ion-slide>
+                </ion-slides>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    
 </ion-content>
 
 <!-- rodape -->
 <ion-footer class="footer-marvel">
+    <ion-row align-items-center text-center>
+        <ion-col col-6>
+            <button ion-button class="btn-limpar" (click)="limpar()"> LIMPAR </button>
+        </ion-col>
+        <ion-col col-6>
+            <button ion-button class="btn-salvar" (click)="salvar()"> FINALIZAR </button>
+        </ion-col>
+    </ion-row>
 </ion-footer>

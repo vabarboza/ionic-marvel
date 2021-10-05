@@ -107818,14 +107818,27 @@ detail .comic-description {
   font-size: 1.5rem;
 }
 
-grid .coluna1 {
-  border: 4px solid red;
+grid .titulo-pagina {
+  color: #f4f4f4;
 }
 
-grid .coluna2 {
-  border: 4px solid green;
+grid .label-segmento {
+  color: #f4f4f4;
 }
 
-grid .coluna3 {
-  border: 4px solid yellow;
+grid .header-marvel {
+  background-color: #167ABC;
+}
+
+grid .footer-marvel {
+  padding: 0;
+  background-color: #9ba2a5;
+}
+
+grid .btn-limpar {
+  background-color: #28aaa4;
+}
+
+grid .btn-salvar {
+  background-color: #167ABC;
 }
